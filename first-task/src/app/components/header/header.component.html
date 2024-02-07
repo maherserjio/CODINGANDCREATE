@@ -1,0 +1,28 @@
+<header class="bg-gray-200 py-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <img src="assets/logo.png" alt="Logo" class="h-8 pl-4">
+        <nav class="hidden md:block pr-4">
+            <ul class="flex space-x-4">
+                <li><a [routerLink]="['home']">Home</a></li>
+                <li><a [routerLink]="['about']">About</a></li>
+                <li><a [routerLink]="['services']">Services</a></li>
+                <li><a [routerLink]="['contact']">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="md:hidden pr-4">
+            <button  (click)="toggleMenu()"class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-500 hover:text-gray-700 hover:border-gray-700">
+                <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M2 5a1 1 0 011-1h14a1 1 0 110 2H3a1 1 0 01-1-1zm0 6a1 1 0 011-1h14a1 1 0 110 2H3a1 1 0 01-1-1zm0 6a1 1 0 011-1h14a1 1 0 110 2H3a1 1 0 01-1-1z" clip-rule="evenodd" />
+                </svg>
+              </button>
+        </div>
+    </div>
+    <nav *ngIf="isMenuOpen" class="md:hidden pr-4">
+        <ul class="flex flex-col space-y-4 pt-4 pl-4">
+            <li><a [routerLink]="['home']">Home</a></li>
+            <li><a [routerLink]="['about']">About</a></li>
+            <li><a [routerLink]="['services']">Services</a></li>
+            <li><a [routerLink]="['contact']">Contact</a></li>
+        </ul>
+    </nav>
+</header>
