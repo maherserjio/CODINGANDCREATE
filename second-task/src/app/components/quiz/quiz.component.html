@@ -1,0 +1,48 @@
+
+<div class="container mx-auto">
+    <div class="flex items-center justify-center mt-8">
+      <div class="w-full md:w-2/3 lg:w-1/2">
+        <div class="bg-white p-8 shadow">
+          <h2 class="text-lg font-bold mb-4">Quiz Page</h2>
+          <p class="mb-4">Question <span>{{ currentQuestionIndex + 1 }}</span> of {{ totalQuestions }}</p>
+  
+          <div class="mb-8">
+            <h4 class="font-bold mb-2">{{ questions[currentQuestionIndex].question }}</h4>
+            <ul>
+              <li *ngFor="let option of questions[currentQuestionIndex].options" class="mb-2">
+                <label class="flex items-center">
+                  <input type="radio" name="answer" [(ngModel)]="selectedAnswer" [value]="option">
+                  <span class="ml-2">{{ option }}</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+  
+          <div class="flex justify-between">
+            <button *ngIf="!quizSubmitted" class="px-4 py-2 bg-blue-500 text-white font-semibold rounded" (click)="previousQuestion()" [disabled]="currentQuestionIndex === 0 ">Previous</button>
+            <button *ngIf="quizSubmitted"  class="px-4 py-2 bg-blue-500 text-white font-semibold rounded" (click)="reset()" >Reset</button>
+            <ng-container *ngIf="currentQuestionIndex === (totalQuestions - 1); else nextButton">
+              <button class="px-4 py-2 bg-blue-500 text-white font-semibold rounded" (click)="submitQuiz()" [disabled]="!isQuizComplete()">Submit</button>
+            </ng-container>
+            <ng-template #nextButton>
+              <button class="px-4 py-2 bg-blue-500 text-white font-semibold rounded" (click)="nextQuestion()" [disabled]="selectedAnswer === ''">Next</button>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="flex items-center justify-center mt-8" *ngIf="quizSubmitted">
+      <div class="w-full md:w-2/3 lg:w-1/2">
+        <div class="bg-white p-8 shadow">
+          <h2 class="text-lg font-bold mb-4">Quiz Answers</h2>
+          <ul>
+            <li *ngFor="let answer of userAnswers; let i = index" class="mb-2">
+              <p><strong>Question {{ i + 1 }}:</strong> {{ questions[i].question }}</p>
+              <p><strong>Selected Answer:</strong> {{ answer }}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
